@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  clean-architecture:
+    build:
+      context: .
+      dockerfile:  MayraPlatfrom.WebAPI/Dockerfile
+    container_name: clean-arch_Compose
+    ports:
+      - "44339:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production 
+      - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - clean-architecture-network
+    volumes:
+      - ./src:/app/src
+      - ./MayraPlatfrom.WebAPI/appsettings.json:/app/appsettings.json
+networks:
+  clean-architecture-network:
+    driver: bridge
